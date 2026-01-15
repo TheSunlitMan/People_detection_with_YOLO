@@ -3,9 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Models and outputs (large binary files)
-models/
-data/output/
 
 # Logs and databases
 *.log
