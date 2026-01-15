@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Models and outputs (large binary files)
+models/
+data/output/
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Environment
+.env
+.venv/
+venv/
+env/
