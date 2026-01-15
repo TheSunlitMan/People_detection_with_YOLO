@@ -57,23 +57,19 @@ def load_model(model_path: str):
     Raises:
         RuntimeError: If downloading or loading fails.
     """
-    # Создаём директорию, если её нет
     model_dir = os.path.dirname(model_path)
     if model_dir:
         os.makedirs(model_dir, exist_ok=True)
 
-    # Если файл не существует — скачиваем
     if not os.path.isfile(model_path):
         print(f"Model not found at '{model_path}'. Downloading...")
         try:
-            # Официальный URL для yolov8n.pt (актуален на 2025–2026 гг.)
             url = "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8n.pt"
             torch.hub.download_url_to_file(url, model_path, progress=True)
             print(f"✅ Model successfully downloaded to '{model_path}'")
         except Exception as download_error:
             raise RuntimeError(f"Failed to download model from {url}: {download_error}")
 
-    # Загружаем модель
     try:
         model = YOLO(model_path)
         return model
@@ -93,6 +89,8 @@ def process_video(input_path: str, output_path: str, model):
         output_path (str): Path to save annotated output video.
         model (ultralytics.YOLO): Loaded YOLO model.
     """
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
     cap = cv2.VideoCapture(input_path)
     if not cap.isOpened():
         raise FileNotFoundError(f"Cannot open input video: {input_path}")
